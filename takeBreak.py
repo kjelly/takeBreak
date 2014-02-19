@@ -35,8 +35,6 @@ class Timeout(object):
                 self.busy = 0
 
         if idle_time > self.max_busy_time * 1000:
-            if self.idle_callback:
-                self.idle_callback(self.busy)
             self.busy = 0
 
 

@@ -29,7 +29,12 @@ class Timeout(object):
             if self.break_callback:
                 self.break_callback(self.busy)
 
-        if idle_time > self.break_time * 1000:
+            if idle_time > self.break_time * 1000:
+                if self.idle_callback:
+                    self.idle_callback(self.busy)
+                self.busy = 0
+
+        if idle_time > self.max_busy_time * 1000:
             if self.idle_callback:
                 self.idle_callback(self.busy)
             self.busy = 0

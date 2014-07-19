@@ -1,9 +1,15 @@
 #! /usr/bin/env python
 import sys
+import os.path
 from subprocess import check_output
+from lib import get_base_path
 
 from PySide.QtCore import *
 from PySide.QtGui import *
+
+
+def get_base_path():
+    return os.path.dirname(os.path.abspath(os.path.realpath(__file__)))
 
 
 def get_user_idle_time():
@@ -75,7 +81,7 @@ class App(object):
         self.app = QApplication(sys.argv)
         self.tray_icon = 'green'
 
-        icon = QIcon("green-led.png")
+        icon = QIcon(get_base_path() + "/green-led.png")
         menu = QMenu()
         exitAction = menu.addAction("exit")
         exitAction.triggered.connect(sys.exit)

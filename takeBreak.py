@@ -80,14 +80,16 @@ class App(object):
         # Create a Qt application
         self.app = QApplication(sys.argv)
         self.tray_icon = 'green'
+        self.green_led_icon = QIcon(get_base_path() + "/green-led.png")
+        self.red_led_icon = QIcon(get_base_path() + "/red-led.png")
+        self.red_cross_icon = QIcon(get_base_path() + "/red-cross.png")
 
-        icon = QIcon(get_base_path() + "/green-led.png")
         menu = QMenu()
         exitAction = menu.addAction("exit")
         exitAction.triggered.connect(sys.exit)
 
         self.tray = QSystemTrayIcon()
-        self.tray.setIcon(icon)
+        self.tray.setIcon(self.green_led_icon)
         self.tray.setContextMenu(menu)
         self.tray.show()
 
@@ -114,19 +116,16 @@ class App(object):
             self.set_green_led()
 
     def set_green_led(self):
-        icon = QIcon("green-led.png")
-        self.tray.setIcon(icon)
+        self.tray.setIcon(self.green_led_icon)
         self.tray_icon = 'green'
 
     def set_red_led(self):
         if self.tray_icon == 'green':
-            icon = QIcon("red-led.png")
-            self.tray.setIcon(icon)
+            self.tray.setIcon(self.red_led_icon)
             self.tray_icon = 'red'
 
     def set_red_cross(self):
-        icon = QIcon("red-cross.png")
-        self.tray.setIcon(icon)
+        self.tray.setIcon(self.red_cross_icon)
         self.tray_icon = 'red-cross'
 
     def run(self):
